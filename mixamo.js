@@ -73,7 +73,7 @@ const downloadAnimation = (animId, character, product_name) => {
                 .then((json) => json.details.gms_hash)
                 .then((gms_hash) => {
                     const pvals = gms_hash.params.map((param) => param[1]).join(',')
-                    const _gms_hash = Object.assign({}, gms_hash, { params: pvals })
+                    const _gms_hash = Object.assign({}, gms_hash, { params: pvals }) // Anim is baked with default param values
                     return exportAnimation(character, [_gms_hash], product_name)
                 })
                 .then((json) => monitorAnimation(character))
@@ -93,7 +93,10 @@ const downloadAnimLoop = (o) => {
 
     return downloadAnimation(head.id, o.character, head.description)
         .then(() => downloadAnimLoop(o)) //loop
-        .catch(() => Promise.reject("Something went wrong in  downloadAnimationsLoop"))
+        .catch(() => {
+            console.log("Recovering from animation failed to downlaod");
+            return downloadAnimLoop(o) // keep on looping 
+        })
 }
 
 var downloadAnimsInPage = (page, totPages, character) => {
@@ -125,7 +128,7 @@ const start = () => {
 }
 
 const exportAnimation = (character_id, gmsHashArray, product_name) => {
-    console.log('Exporting Anim' + character_id + " to file:" + product_name)
+    console.log('Exporting Anim´:' + character_id + " to file:" + product_name)
     const exportUrl = 'https://www.mixamo.com/api/v1/animations/export'
     const exportBody = {
         character_id,
