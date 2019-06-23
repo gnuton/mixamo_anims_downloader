@@ -133,7 +133,7 @@ const exportAnimation = (character_id, gmsHashArray, product_name) => {
     const exportBody = {
         character_id,
         gms_hash: gmsHashArray, //[{ "model-id": 103120902, "mirror": false, "trim": [0, 100], "overdrive": 0, "params": "0,0,0", "arm-space": 0, "inplace": false }],
-        preferences: { format: "fbx7", skin: "false", fps: "30", reducekf: "0" },
+        preferences: { format: "fbx7", skin: "false", fps: "30", reducekf: "0" }, // To download collada use format: "dae_mixamo"
         product_name,
         type: "Motion"
     };
