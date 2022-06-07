@@ -1,4 +1,4 @@
-# Mixamo Animations downloader
+# Mixamo Characters Uploader & Animations Downloader
 
 ## Download All
  `downloadAll.js` script makes use of mixamo2 API to download all anims for a single character that you choose.
